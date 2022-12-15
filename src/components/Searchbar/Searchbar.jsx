@@ -34,7 +34,8 @@ return (
 <header className={css.searchbar}>
 <form className={css.form} onSubmit={this.handleSubmit}>
   <button type="submit" className={css.button}>
-    {/* <BsSearch size={30}/> */}
+    {/* <BsSearch size={30}/>
+     */}
     <span className={css.button_label}></span>
   </button>
 

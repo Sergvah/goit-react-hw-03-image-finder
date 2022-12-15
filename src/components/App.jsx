@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from './Button/Button'
 import ImageGallery from './ImageGallery/ImageGallery';
-// import {images} from '../services/gallery-api'
+import Modal from './Modal/Modal'
 
 
 
@@ -22,13 +22,13 @@ class App extends React.Component {
   } 
   
    componentDidUpdate(prevProps, prevState){
- if (this.state.inputName !== prevState.inputName){
+ if (this.state.inputName !== prevState.inputName || this.state.page !== prevState.page){
   console.log('Изменилось имя')
   this.setState({loading: true});
  
 
 
- fetch(`https://pixabay.com/api/?q=${this.state.inputName}&page=1&key=30566822-5dd8c7f8088312f63e039c329&image_type=photo&orientation=horizontal&per_page=12`)
+ fetch(`https://pixabay.com/api/?q=${this.state.inputName}&page=${this.state.page}&key=30566822-5dd8c7f8088312f63e039c329&image_type=photo&orientation=horizontal&per_page=12`)
  .then(res => res.json())
  .then(data => {data.hits.forEach(({ id, webformatURL, largeImageURL, tags }) => {
   return this.setState(prev=>({
@@ -48,25 +48,32 @@ class App extends React.Component {
 
 
 handleSubmitForm = inputName => {
-this.setState({inputName, images:[]})
+this.setState({inputName, images:[], page: 1})
 }
 
 onClick=(photo)=>{
-  this.setState({largeImage:photo,showModal:true})
+  this.setState({ largeImage:photo, showModal:true })
 }
 
 
 loadMoreHandler = () => {
-  this.setState(prevState => ({ page: prevState.page + 1 }));
+  this.setState(prevState => ({ page: prevState.page + 1 }))
+
 };
+onModalClose=()=>{
+  this.setState(prevState=>({ showModal: !prevState.showModal }))
+  console.log("modalka")
+}
 
 render (){
-  const{images,totalPages, page}=this.state;
+  const{images, totalPages, page, showModal, largeImage}=this.state;
   return( <div>
     <Searchbar onSub={this.handleSubmitForm}/>
+    {showModal && <Modal src={largeImage} onClose={this.onModalClose}/>  }
     <ToastContainer autoclose={3000}/>
     <ImageGallery imageObject={images} onClick={this.onClick}/>
     {images.length !== 0 && totalPages>page && <Button onLoadMore={this.loadMoreHandler} />}
+   
   </div>)
 };
 }

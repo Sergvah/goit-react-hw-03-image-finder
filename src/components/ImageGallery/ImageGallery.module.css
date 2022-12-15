@@ -1,0 +1,15 @@
+.list_image {
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+    display: flex;
+   
+    flex-wrap: wrap;
+    margin: 0 auto;
+ 
+    gap: 30px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}

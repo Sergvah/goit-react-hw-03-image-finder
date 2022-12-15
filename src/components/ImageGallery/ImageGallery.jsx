@@ -1,9 +1,10 @@
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem'
 import PropTypes from 'prop-types';
+import css from '../ImageGallery/ImageGallery.module.css'
 
 const ImageGallery = ({imageObject, onClick}) => {
     return (
-        <ul>
+        <ul className={css.list_image}>
         {imageObject && imageObject.map(item=>
 <ImageGalleryItem item={item} key={item.id} onClick={onClick}/>)}
     </ul>
