@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from './Button/Button'
 import ImageGallery from './ImageGallery/ImageGallery';
 import Modal from './Modal/Modal'
-
+import Spinner from "./Loader/Loader";
 
 
 class App extends React.Component {
@@ -66,9 +66,10 @@ onModalClose=()=>{
 }
 
 render (){
-  const{images, totalPages, page, showModal, largeImage}=this.state;
+  const{images, totalPages, page, showModal, largeImage, loading}=this.state;
   return( <div>
     <Searchbar onSub={this.handleSubmitForm}/>
+    {loading && <Spinner/>}
     {showModal && <Modal src={largeImage} onClose={this.onModalClose}/>  }
     <ToastContainer autoclose={3000}/>
     <ImageGallery imageObject={images} onClick={this.onClick}/>
