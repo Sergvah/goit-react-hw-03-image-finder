@@ -5,7 +5,7 @@ import css from '../ImageGallery/ImageGallery.module.css'
 const ImageGallery = ({imageObject, onClick}) => {
     return (
         <ul className={css.list_image}>
-        {imageObject && imageObject.map(item=>
+        {imageObject.map(item=>
 <ImageGalleryItem item={item} key={item.id} onClick={onClick}/>)}
     </ul>
     )

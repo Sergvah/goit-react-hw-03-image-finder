@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-// import {BsSearch} from "react-icons/bs"
 import PropTypes from 'prop-types';
 import css from '../Searchbar/Searchbar.module.css'
 import {ReactComponent as AddIcon} from '../icons/search.svg'
@@ -35,7 +34,7 @@ return (
 <header className={css.searchbar}>
 <form className={css.form} onSubmit={this.handleSubmit}>
   <button type="submit" className={css.button}>
-    {/* <BsSearch size={30}/> */}
+ 
     <AddIcon className={css.icon}/>
     <span className={css.button_label}></span>
   </button>
