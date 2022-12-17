@@ -72,7 +72,7 @@ render (){
     {loading && <Spinner/>}
     {showModal && <Modal src={largeImage} onClose={this.onModalClose}/>  }
     <ToastContainer autoclose={3000}/>
-    <ImageGallery imageObject={images} onClick={this.onClick}/>
+    {images.length >0 && <ImageGallery imageObject={images} onClick={this.onClick}/>}
     {images.length !== 0 && totalPages>page && <Button onLoadMore={this.loadMoreHandler} />}
    
   </div>)
