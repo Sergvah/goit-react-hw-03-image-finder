@@ -28,20 +28,18 @@ class App extends React.Component {
       this.setState({ loading: true });
 
       //  fetch(`https://pixabay.com/api/?q=${this.state.inputName}&page=${this.state.page}&key=30566822-5dd8c7f8088312f63e039c329&image_type=photo&orientation=horizontal&per_page=12`)
-      const responseData = response(this.state.inputName, this.state.page)
+      response(this.state.inputName, this.state.page)
         .then(data => {
           console.log(data);
-          responseData.data.hits.forEach(
-            ({ id, webformatURL, largeImageURL, tags }) => {
-              return this.setState(prev => ({
-                images: [
-                  ...prev.images,
-                  { id, webformatURL, largeImageURL, tags },
-                ],
-                totalPages: Math.ceil(data.totalHits / 12),
-              }));
-            }
-          );
+          data.hits.forEach(({ id, webformatURL, largeImageURL, tags }) => {
+            return this.setState(prev => ({
+              images: [
+                ...prev.images,
+                { id, webformatURL, largeImageURL, tags },
+              ],
+              totalPages: Math.ceil(data.totalHits / 12),
+            }));
+          });
         })
         .finally(() => this.setState({ loading: false }));
     }
